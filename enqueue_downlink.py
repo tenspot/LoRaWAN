@@ -12,6 +12,8 @@ web interface.
 
 import os
 import sys
+import json
+import base64
 
 
 from chirpstack_api.as_pb.external import api
@@ -40,9 +42,21 @@ if __name__ == "__main__":
   auth_token = [("authorization", "Bearer %s" % api_token)]
 
   # Construct request.
+  datatosend = bytes("This is a test string from VSCode.", 
+'utf-8')
+  datatosendb64 = base64.b64encode(datatosend).decode("utf-8")
+  packettosend = {
+      "confirmed": True,
+      "fPort": 3,
+      # "data": "aGFsbG8=",
+      "data": "THIS IS A TEST STRING" # str(datatosendb64)
+  }
+
+  # json_packettosend = bytes(json.dumps(packettosend), "utf-8")
+  json_packettosend = bytes(str(packettosend),"utf-8")
   req = api.EnqueueDeviceQueueItemRequest()
   req.device_queue_item.confirmed = False
-  req.device_queue_item.data = bytes([0x01, 0x02, 0x03])
+  req.device_queue_item.data = json_packettosend # datatosend # bytes([0x01, 0x02, 0x03])
   req.device_queue_item.dev_eui = dev_eui.hex()
   req.device_queue_item.f_port = 10
 
