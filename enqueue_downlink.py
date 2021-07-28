@@ -13,8 +13,9 @@ web interface.
 import os
 import sys
 
-import grpc
+
 from chirpstack_api.as_pb.external import api
+import grpc
 
 # Configuration.
 
@@ -22,10 +23,11 @@ from chirpstack_api.as_pb.external import api
 server = "192.168.0.7:8080"
 
 # The DevEUI for which you want to enqueue the downlink.
-dev_eui = bytes([0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01])
+# 2C:F7:F1:20:24:90:0A:EA
+dev_eui = bytes([0x2C,0xF7,0xF1,0x20,0x24,0x90,0x0A,0xEA])
 
 # The API token (retrieved using the web-interface).
-api_token = "..."
+api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5X2lkIjoiZWQ5YjA1MWMtOGJlNS00NzE1LWJhNmQtOGNjNzdhNDAxMjI4IiwiYXVkIjoiYXMiLCJpc3MiOiJhcyIsIm5iZiI6MTYyNzQwMjM4Niwic3ViIjoiYXBpX2tleSJ9.XnLezifiSNbIxLeNdv9NrVkR4UCD-sOHlU3DoW1QLzU"
 
 if __name__ == "__main__":
   # Connect without using TLS.

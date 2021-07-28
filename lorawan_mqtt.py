@@ -12,7 +12,7 @@ def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
     # client.subscribe("application/2/device/2cf7f12024900aea/rx")
     client.subscribe("application/2/#")
-    client.publish("application/2/device/2cf7f12024900aea/tx", ' { "confirmed": true, "fPort": 8, "data":  "test reply----" }') 
+    client.publish("application/2/device/2cf7f12024900aea/tx", ' { "confirmed": true, "fPort": 8, "data":  bytes([0x01, 0x02, 0x03]) }') 
     # client.publish("application/2/device/2cf7f12024900aea/command/down", ' { "confirmed": true, "fPort": 8, "data": "test reply----" }')
     # application/2/device/2cf7f12024900aea/command/down
     
